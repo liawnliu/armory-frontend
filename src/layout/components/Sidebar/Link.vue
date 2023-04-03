@@ -5,24 +5,24 @@
 </template>
 
 <script>
-import { isExternal } from '@/utils/validate'
+import { isExternal } from '@/utils/validate';
 
 export default {
   props: {
     to: {
-      type: String,
+      type: [String, Object],
       required: true
     }
   },
   computed: {
     isExternal() {
-      return isExternal(this.to)
+      return isExternal(this.to);
     },
     type() {
       if (this.isExternal) {
-        return 'a'
+        return 'a';
       }
-      return 'router-link'
+      return 'router-link';
     }
   },
   methods: {
@@ -32,12 +32,12 @@ export default {
           href: to,
           target: '_blank',
           rel: 'noopener'
-        }
+        };
       }
       return {
         to: to
-      }
+      };
     }
   }
-}
+};
 </script>

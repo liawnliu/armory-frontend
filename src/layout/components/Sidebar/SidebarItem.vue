@@ -1,23 +1,22 @@
 <template>
   <div v-if="!item.hidden">
-    <template v-if="hasOneShowingChild(item.children,item) && (!onlyOneChild.children||onlyOneChild.noShowingChildren)&&!item.alwaysShow">
-      <app-link v-if="onlyOneChild.meta" :to="resolvePath(onlyOneChild.path)">
-        <el-menu-item :index="resolvePath(onlyOneChild.path)" :class="{'submenu-title-noDropdown':!isNest}">
+    <template v-if="onlyOneChild">
+      <app-link v-if="onlyOneChild.meta" :to="{name:onlyOneChild.name}">
+        <el-menu-item :index="onlyOneChild.name" :class="{'submenu-title-noDropdown':!isNest}">
           <item :icon="onlyOneChild.meta.icon||(item.meta&&item.meta.icon)" :title="onlyOneChild.meta.title" />
         </el-menu-item>
       </app-link>
     </template>
 
-    <el-submenu v-else ref="subMenu" :index="resolvePath(item.path)" popper-append-to-body>
+    <el-submenu v-else ref="subMenu" :index="item.name || item.path" popper-append-to-body>
       <template slot="title">
         <item v-if="item.meta" :icon="item.meta && item.meta.icon" :title="item.meta.title" />
       </template>
       <sidebar-item
         v-for="child in item.children"
-        :key="child.path"
+        :key="child.name"
         :is-nest="true"
         :item="child"
-        :base-path="resolvePath(child.path)"
         class="nest-menu"
       />
     </el-submenu>
@@ -25,18 +24,15 @@
 </template>
 
 <script>
-import path from 'path'
-import { isExternal } from '@/utils/validate'
-import Item from './Item'
-import AppLink from './Link'
-import FixiOSBug from './FixiOSBug'
+import Item from './Item';
+import AppLink from './Link';
+import FixiOSBug from './FixiOSBug';
 
 export default {
   name: 'SidebarItem',
   components: { Item, AppLink },
   mixins: [FixiOSBug],
   props: {
-    // route object
     item: {
       type: Object,
       required: true
@@ -44,52 +40,39 @@ export default {
     isNest: {
       type: Boolean,
       default: false
-    },
-    basePath: {
-      type: String,
-      default: ''
     }
   },
-  data() {
-    // To fix https://github.com/PanJiaChen/vue-admin-template/issues/237
-    // TODO: refactor with render function
-    this.onlyOneChild = null
-    return {}
-  },
-  methods: {
-    hasOneShowingChild(children = [], parent) {
-      const showingChildren = children.filter(item => {
-        if (item.hidden) {
-          return false
-        } else {
-          // Temp set(will be used if only has one showing child)
-          this.onlyOneChild = item
-          return true
+  computed: {
+    // 只有一个子项时，是否由该子项代替当前项来显示
+    onlyOneChild() {
+      const handleOnlyOneChild = parent => {
+        // 当前这项没有子项，那么没必要用到el-submenu，则返回当前这项
+        if (!parent.children || !parent.children.length) {
+          return parent;
         }
-      })
 
-      // When there is only one child router, the child router is displayed by default
-      if (showingChildren.length === 1) {
-        return true
-      }
+        // 当前这项有子项，过滤出可见的子项
+        const childArr = parent.children.filter(item => !item.hidden);
 
-      // Show parent if there are no child router to display
-      if (showingChildren.length === 0) {
-        this.onlyOneChild = { ... parent, path: '', noShowingChildren: true }
-        return true
-      }
+        // 当前这项没有可见的子项，那么没必要用到el-submenu，则返回当前这项
+        if (!childArr.length) {
+          return this.item;
+        }
 
-      return false
-    },
-    resolvePath(routePath) {
-      if (isExternal(routePath)) {
-        return routePath
-      }
-      if (isExternal(this.basePath)) {
-        return this.basePath
-      }
-      return path.resolve(this.basePath, routePath)
+        // 当前这项有1个以上的可见的子项，那需要用到el-submenu，则返回false
+        if (childArr.length > 1) {
+          return false;
+        }
+
+        // alwaysShow字段为true，表示一直显示根路由，需要用到el-submenu，那么返回false
+        if (parent.alwaysShow) return false;
+
+        // 当前这项只有1个可见子项，还需要对这个可见子项做一次判断
+        // 比如递归时childArr.length一直为1，最后的可能结果是让最深的那一项作为最终返回值
+        return handleOnlyOneChild(childArr[0]);
+      };
+      return handleOnlyOneChild(this.item);
     }
   }
-}
+};
 </script>

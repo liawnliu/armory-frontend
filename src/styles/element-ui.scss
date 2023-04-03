@@ -6,7 +6,7 @@
 }
 
 .el-upload {
-  input[type="file"] {
+  input[type='file'] {
     display: none !important;
   }
 }
@@ -14,7 +14,6 @@
 .el-upload__input {
   display: none;
 }
-
 
 // to fixed https://github.com/ElemeFE/element/issues/2461
 .el-dialog {
@@ -39,11 +38,25 @@
 // dropdown
 .el-dropdown-menu {
   a {
-    display: block
+    display: block;
   }
 }
 
 // to fix el-date-picker css style
 .el-range-separator {
   box-sizing: content-box;
+}
+.el-loading-mask {
+  background-color: unset;
+}
+
+/* 它是单独插到body里的，目前就资源管理的component用到了 */
+.el-autocomplete-suggestion{
+  .el-autocomplete-suggestion__wrap{
+    padding: 3px 0;
+    li {
+      font-size: 13px;
+      padding: 0 5px
+    }
+  }
 }

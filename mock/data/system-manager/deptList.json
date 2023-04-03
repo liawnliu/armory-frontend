@@ -1,0 +1,102 @@
+[
+  {
+    "id": 1,
+    "pid": 0,
+    "likeId": "0,1",
+    "parentName": "顶级部门",
+    "manager": null,
+    "name": "高原西北风科技有限公司",
+    "deptCode": null,
+    "deptAddress": null,
+    "deptPhone": null,
+    "orderNum": null,
+    "open": null,
+    "children": [
+      {
+        "id": 19,
+        "pid": 1,
+        "likeId": "0,1,19",
+        "parentName": "高原西北风科技有限公司",
+        "manager": "",
+        "name": "软件研发部",
+        "deptCode": "RJYF",
+        "deptAddress": "",
+        "deptPhone": "",
+        "orderNum": null,
+        "open": null,
+        "children": []
+      },
+      {
+        "id": 13,
+        "pid": 1,
+        "likeId": "0,1,13",
+        "parentName": "高原机械制造有限公司",
+        "manager": "李明",
+        "name": "排产部门",
+        "deptCode": "PCBM",
+        "deptAddress": "",
+        "deptPhone": "18687116223",
+        "orderNum": 1,
+        "open": null,
+        "children": []
+      },
+      {
+        "id": 20,
+        "pid": 1,
+        "likeId": "0,1,19,20",
+        "parentName": "高原西北风科技有限公司",
+        "manager": "张三",
+        "name": "前端开发",
+        "deptCode": "QDKF",
+        "deptAddress": "北京",
+        "deptPhone": "18687116223",
+        "orderNum": 1,
+        "open": null,
+        "children": [
+          {
+            "id": 18,
+            "pid": 20,
+            "likeId": "0,1,18",
+            "parentName": "前端开发",
+            "manager": "",
+            "name": "人事管理部",
+            "deptCode": "RSGL",
+            "deptAddress": "",
+            "deptPhone": "",
+            "orderNum": null,
+            "open": null,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": 12,
+        "pid": 1,
+        "likeId": "0,1,12",
+        "parentName": "高原机械制造有限公司",
+        "manager": "张丽荣",
+        "name": "生产部门",
+        "deptCode": "SCBM",
+        "deptAddress": "",
+        "deptPhone": "18787171906",
+        "orderNum": 2,
+        "open": null,
+        "children": []
+      },
+      {
+        "id": 14,
+        "pid": 1,
+        "likeId": "0,1,14",
+        "parentName": "高原机械制造有限公司",
+        "manager": "崔浩",
+        "name": "检验部门",
+        "deptCode": "JYBM",
+        "deptAddress": "",
+        "deptPhone": "13314358245",
+        "orderNum": 3,
+        "open": null,
+        "children": []
+      }
+    ]
+  }
+]

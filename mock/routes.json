@@ -1,0 +1,22 @@
+{
+  "/api/sysUser/refreshToken": "systemManager_token",
+  "/api/user/login": "systemManager_userList",
+  "/api/sysUser/getInfo": "systemManager_nowUser",
+  "/api/sysUser/getMenuList": "systemManager_menuList",
+  "/api/sysUser/loginOut": "systemManager_nowUser",
+  "/api/user/list": "systemManager_userList",
+  "/api/user": "systemManager_userList",
+  "/api/role/list": "systemManager_roleList",
+  "/api/role": "systemManager_roleList",
+  "/api/dept/list": "systemManager_deptList",
+  "/api/dept/parent": "systemManager_deptList",
+  "/api/dept": "systemManager_deptList",
+  "/api/menu/list": "systemManager_menuList",
+  "/api/menu/parent": "systemManager_menuList",
+  "/api/menu": "systemManager_menuList",
+  "/api/role/getAssignPermissionTree": "systemManager_roleList",
+  "/api/role/roleAssignSave": "systemManager_roleList",
+  "/scene/save": "loadManager_sceneList",
+  "/scene/list": "loadManager_sceneList",
+  "/scene/getSceneApiById": "loadManager_sceneApiList"
+}

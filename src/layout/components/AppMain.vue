@@ -1,7 +1,10 @@
 <template>
   <section class="app-main">
+    <!-- transition过渡标签，mode控制离开/进入过渡的时间序列 -->
     <transition name="fade-transform" mode="out-in">
-      <router-view :key="key" />
+      <keep-alive :include="cachedViews">
+        <router-view :key="key" />
+      </keep-alive>
     </transition>
   </section>
 </template>
@@ -10,14 +13,18 @@
 export default {
   name: 'AppMain',
   computed: {
+    cachedViews() {
+      return this.$store.state.tagsView.cachedViews;
+    },
     key() {
-      return this.$route.path
+      console.log('this.$route.path', this.$route.path);
+      return this.$route.path;
     }
   }
-}
+};
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .app-main {
   /*50 = navbar  */
   min-height: calc(100vh - 50px);
@@ -25,16 +32,26 @@ export default {
   position: relative;
   overflow: hidden;
 }
-.fixed-header+.app-main {
+.fixed-header + .app-main {
   padding-top: 50px;
+}
+.hasTagsView {
+  .app-main {
+    /* 84 = navbar + tags-view = 50 + 34 */
+    min-height: calc(100vh - 84px);
+  }
+
+  .fixed-header+.app-main {
+    padding-top: 84px;
+  }
 }
 </style>
 
 <style lang="scss">
 // fix css style bug in open el-dialog
-.el-popup-parent--hidden {
+/* .el-popup-parent--hidden {
   .fixed-header {
-    padding-right: 15px;
+    padding-right: 17px;
   }
-}
+} */
 </style>

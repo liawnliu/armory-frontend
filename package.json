@@ -11,19 +11,27 @@
     "svgo": "svgo -f src/icons/svg --config=src/icons/svgo.yml",
     "lint": "eslint --ext .js,.vue src",
     "test:unit": "jest --clearCache && vue-cli-service test:unit",
-    "test:ci": "npm run lint && npm run test:unit"
+    "test:ci": "npm run lint && npm run test:unit",
+    "mock": "node mock/server.js"
   },
   "dependencies": {
-    "axios": "0.18.1",
-    "core-js": "3.6.5",
+    "axios": "0.21.3",
+    "core-js": "3.20.2",
+    "echarts": "5.2.2",
     "element-ui": "2.13.2",
     "js-cookie": "2.2.0",
+    "js-md5": "^0.7.3",
+    "lodash": "4.0.0",
     "normalize.css": "7.0.0",
     "nprogress": "0.2.0",
     "path-to-regexp": "2.4.0",
+    "qs": "6.9.6",
+    "screenfull": "4.2.0",
+    "sortablejs": "1.8.4",
     "vue": "2.6.10",
     "vue-router": "3.0.6",
-    "vuex": "3.1.0"
+    "vuex": "3.1.0",
+    "xss": "^1.0.11"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "4.4.4",
@@ -34,13 +42,15 @@
     "autoprefixer": "9.5.1",
     "babel-eslint": "10.1.0",
     "babel-jest": "23.6.0",
-    "babel-plugin-dynamic-import-node": "2.3.3",
+    "body-parser": "1.19.2",
     "chalk": "2.4.2",
     "connect": "3.6.6",
     "eslint": "6.7.2",
     "eslint-plugin-vue": "6.2.2",
+    "express": "4.17.2",
     "html-webpack-plugin": "3.2.0",
-    "mockjs": "1.0.1-beta3",
+    "mockjs": "1.1.0",
+    "nanoid": "3.3.1",
     "runjs": "4.3.2",
     "sass": "1.26.8",
     "sass-loader": "8.0.2",
@@ -52,7 +62,8 @@
   },
   "browserslist": [
     "> 1%",
-    "last 2 versions"
+    "last 2 versions",
+    "not ie <= 8"
   ],
   "engines": {
     "node": ">=8.9",

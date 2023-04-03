@@ -1,11 +1,12 @@
+/* 清除浮动 */
 @mixin clearfix {
   &:after {
-    content: "";
+    content: '';
     display: table;
     clear: both;
   }
 }
-
+/* 修改滚动条 */
 @mixin scrollBar {
   &::-webkit-scrollbar-track-piece {
     background: #d3dce6;
@@ -20,9 +21,15 @@
     border-radius: 20px;
   }
 }
-
+/* 相对布局 */
 @mixin relative {
   position: relative;
   width: 100%;
   height: 100%;
+}
+/* 文字过长会截取成三个点 */
+@mixin hiddenText {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
